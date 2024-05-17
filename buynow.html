@@ -1,0 +1,119 @@
+<html>
+<head>
+	<meta name="viewport" content="with=device-width, initial-scale=1.0">
+	
+	<title>The Guitarist Haven</title>
+	<link rel="stylesheet" href="style.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+<!-- header section -->
+<section class="header">
+	<nav>
+		<a href="index.html"><img src="images/logo.jfif"></a>
+		<div class="nav-links">
+			<ul>
+				<li><a href="index.html">HOME</a></li>
+				<li><a href="products.html">PRODUCTS</a></li>
+				<li><a href="aboutus.html">ABOUT US</a></li>
+				<li><a href="register.html">REGISTER</a></li>
+				<li><a href="contact.html">CONTACT</a></li>
+			</ul>
+		</div>
+	</nav>
+</section>
+
+<section class="orderpage">
+<div class="orderContainer">
+    <h1>Order Page</h1>
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name">
+        <span class="error" id="name-error">Please enter your name.</span>
+    </div>
+    <div class="form-group">
+        <label for="address">Address</label>
+        <input type="text" id="address" name="address" placeholder="Enter your address">
+        <span class="error" id="address-error">Please enter your address.</span>
+    </div>
+    <div class="form-group">
+        <label for="product">Order Summary</label>
+        <h5>Your Items:</h5>
+        <ul id="order-items"></ul>
+        <h5>Your Total: <span id="order-total"></span></h5>
+    </div>
+    <div class="form-group">
+        <label for="payment">Payment Amount</label>
+        <input type="number" id="payment" name="payment" placeholder="Enter your payment amount">
+    </div>
+    <div id="change-amount"></div>
+    <button id="submit-order">Submit Order</button>
+</div>
+		<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var total = localStorage.getItem("orderTotal");
+    document.getElementById("order-total").innerText = total;
+    
+    var cartItems = JSON.parse(localStorage.getItem("cartItems"));
+    var orderItemsList = document.getElementById("order-items");
+    cartItems.forEach(function(item) {
+        var listItem = document.createElement("li");
+        listItem.innerText = `${item.title} - ${item.price} x ${item.quantity}`;
+        orderItemsList.appendChild(listItem);
+    });
+
+    // Calculate change amount
+    var paymentInput = document.getElementById("payment");
+    paymentInput.addEventListener("input", function() {
+        var paymentAmount = parseFloat(paymentInput.value);
+        var orderTotal = parseFloat(total.replace("₱", ""));
+        var changeAmount = paymentAmount - orderTotal;
+        if (changeAmount < 0) {
+            document.getElementById("change-amount").innerText = "Payment amount cannot be less than the order total.";
+        } else {
+            document.getElementById("change-amount").innerText = "Change Amount: ₱" + changeAmount.toFixed(2);
+        }
+    });
+
+    // Submit order
+    var submitOrderBtn = document.getElementById("submit-order");
+    submitOrderBtn.addEventListener("click", function() {
+        var nameInput = document.getElementById("name");
+        var addressInput = document.getElementById("address");
+        var name = nameInput.value.trim();
+        var address = addressInput.value.trim();
+        var paymentAmount = parseFloat(paymentInput.value);
+        var orderTotal = parseFloat(total.replace("₱", ""));
+        var changeAmount = paymentAmount - orderTotal;
+        if (name === "") {
+            document.getElementById("name-error").style.display = "block";
+        } else {
+            document.getElementById("name-error").style.display = "none";
+        }
+        if (address === "") {
+            document.getElementById("address-error").style.display = "block";
+        } else {
+            document.getElementById("address-error").style.display = "none";
+        }
+        if (name !== "" && address !== "" && changeAmount >= 0) {
+    // Payment successful and all fields are filled, proceed with order submission
+    var orderDetails = {
+        name: name,
+        address: address,
+        items: cartItems,
+        total: total,
+        paymentAmount: "₱" + paymentAmount,
+        changeAmount: "₱" + changeAmount
+    };
+    localStorage.setItem("orderDetails", JSON.stringify(orderDetails));
+    // Redirect to another page
+    window.location.href = "receipt.html";
+}
+    });
+});
+		</script>
+</section>
+</body>
+</html>

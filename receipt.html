@@ -1,0 +1,115 @@
+<html>
+<head>
+	<meta name="viewport" content="with=device-width, initial-scale=1.0">
+	
+	<title>The Guitarist Haven</title>
+	<link rel="stylesheet" href="style.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+<!-- header section -->
+<section class="header">
+	<nav>
+		<a href="index.html"><img src="images/logo.jfif"></a>
+		<div class="nav-links">
+			<ul>
+				<li><a href="index.html">HOME</a></li>
+				<li><a href="products.html">PRODUCTS</a></li>
+				<li><a href="aboutus.html">ABOUT US</a></li>
+				<li><a href="register.html">REGISTER</a></li>
+				<li><a href="contact.html">CONTACT</a></li>
+			</ul>
+		</div>
+	</nav>
+</section>
+<section class="receipt">
+<style>
+.receipt {
+    font-family: Arial, sans-serif;
+    background-color: #f1f1f1;
+    margin: 0;
+    padding: 0;
+}
+
+.receiptcontainer {
+    max-width: 300px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.customer-info {
+    margin-bottom: 20px;
+}
+
+.customer-info p {
+    margin: 5px 0;
+}
+
+.order-details {
+    border-top: 2px solid #ccc;
+    padding-top: 20px;
+}
+
+.order-details h3 {
+    color: #333;
+}
+
+.order-details ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.order-details ul li {
+    margin-bottom: 5px;
+}
+
+.order-details p {
+    margin: 5px 0;
+}
+</style>
+<h1>Receipt</h1>
+    <div class="receiptcontainer">
+    <h1>Order Confirmation</h1>
+    <div class="customer-info">
+        <p><strong>Name:</strong> <span id="customer-name"></span></p>
+        <p><strong>Address:</strong> <span id="customer-address"></span></p>
+    </div>
+    <div class="order-details">
+        <h3>Order Summary:</h3>
+        <ul id="order-items">
+        </ul>
+        <p><strong>Total:</strong> <span id="order-total">$25</span></p>
+        <p><strong>Payment Amount:</strong> <span id="payment-amount"></span></p>
+        <p><strong>Change Amount:</strong> <span id="change-amount"></span></p>
+    </div>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var orderDetails = JSON.parse(localStorage.getItem("orderDetails"));
+    document.getElementById("customer-name").innerText = orderDetails.name;
+    document.getElementById("customer-address").innerText = orderDetails.address;
+    document.getElementById("order-total").innerText = orderDetails.total;
+    document.getElementById("payment-amount").innerText = orderDetails.paymentAmount;
+    document.getElementById("change-amount").innerText = orderDetails.changeAmount;
+
+    var orderItemsList = document.getElementById("order-items");
+    orderDetails.items.forEach(function(item) {
+        var listItem = document.createElement("li");
+        listItem.innerText = `${item.title} - ${item.price} x ${item.quantity}`;
+        orderItemsList.appendChild(listItem);
+    });
+});
+</script>
+</section>
+</body>
+</html>

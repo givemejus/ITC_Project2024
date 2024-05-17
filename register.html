@@ -1,0 +1,123 @@
+<html>
+<head>
+	<meta name="viewport" content="with=device-width, initial-scale=1.0">
+	
+	<title>The Guitarist Haven</title>
+	<link rel="stylesheet" href="style.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+<!-- header section -->
+<section class="header">
+	<nav>
+		<a href="index.html"><img src="images/logo.jfif"></a>
+		<div class="nav-links">
+			<ul>
+				<li><a href="index.html">HOME</a></li>
+				<li><a href="products.html">PRODUCTS</a></li>
+				<li><a href="aboutus.html">ABOUT US</a></li>
+				<li><a href="register.html">REGISTER</a></li>
+				<li><a href="contact.html">CONTACT</a></li>
+			</ul>
+		</div>
+	</nav>
+</section>
+<section class="registration">
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f1f1f1;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 400px;
+    margin: 100px auto;
+    background-color: #eadbc8;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+h2 {
+    text-align: center;
+    color: #b5c18e;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    color: #c7b7a3;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #b5c18e;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #b5c18e;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #a1b77d;
+}
+
+#error-message {
+    color: red;
+}
+</style>
+<div class="container">
+    <h2>Registration Form</h2>
+    <form id="registration-form">
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit">Register</button>
+    </form>
+    <p id="message"></p>
+</div>
+<script>
+document.getElementById("registration-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+    
+    var username = document.getElementById("username").value;
+    var email = document.getElementById("email").value;
+    var password = document.getElementById("password").value;
+    
+    if (username === "" || email === "" || password === "") {
+        document.getElementById("message").innerHTML = "Please fill out all fields.";
+    } else {
+        document.getElementById("message").innerHTML = "Registration successful!";
+        // Here you can perform further actions like submitting the form data via AJAX
+    }
+});
+</script>
+</section>
+</body>
+</html>
